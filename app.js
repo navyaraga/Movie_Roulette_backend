@@ -48,7 +48,7 @@ app.post('/selectmovie', (req, res) => {
         console.log(result);
         res.send(result[0]);
     })
-})
+}) 
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Listening to port ${PORT}`)
