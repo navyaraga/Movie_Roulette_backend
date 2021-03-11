@@ -15,9 +15,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'navya'
+    host: 'us-cdbr-east-03.cleardb.com',
+    user: 'b2b24044b19233',
+    password: 'e5a93eaf',
+    database:heroku_76ca6dc5b7a8f54
 });
 
 connection.connect((err) => {
@@ -41,7 +42,9 @@ app.post('/selectmovie', (req, res) => {
 
     let sql = 'SELECT movie_title,imdb_score,genres FROM moviestable WHERE imdb_score >? and LOCATE(?,genres,1) ORDER BY RAND() LIMIT 1;';
     connection.query(sql, [req.body.imdb_score, req.body.genres], (err, result, fields) => {
-        if (err) console.log('error in post select movie', err);
+        if (err){
+            console.log('error in post select movie', err);
+        }
         console.log(result);
         res.send(result[0]);
     })
